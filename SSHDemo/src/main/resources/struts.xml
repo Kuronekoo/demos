@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+    <package name="Employee" extends="struts-default" namespace="/">
+        <!-- 配置使用 paramsPrepareParamsStack 作为默认的拦截器栈 -->
+        <!-- 修改 PrepareInterceptor 拦截器的 alwaysInvokePrepare 属性值为 false，这样就不会执行prepare()方法了，会 -->
+        <interceptors>
+            <interceptor-stack name="scstack">
+                <interceptor-ref name="paramsPrepareParamsStack">
+                    <param name="prepare.alwaysInvokePrepare">false</param>
+                </interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+
+        <!--声明atguigustack替换为默认的拦截器栈 -->
+        <default-interceptor-ref name="scstack"/>
+        <!-- struts2.5 为了提升安全性，添加了 allomethod，试用通配符映射时，不添加这句会报错-->
+        <global-allowed-methods>regex:.*</global-allowed-methods>
+
+        <action name="emp!*" class="employeeAction" method="{1}" >
+            <result name="list">/WEB-INF/pages/emp-list.jsp</result>
+            <result name="input">/WEB-INF/pages/emp-input.jsp</result>
+            <result name="success" type="redirectAction">emp!list</result>
+        </action>
+
+    </package>
+
+</struts>

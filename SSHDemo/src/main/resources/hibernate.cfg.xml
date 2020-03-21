@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!--数据库方言-->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+        <!--展示SQL-->
+        <property name="hibernate.show_sql">true</property>
+        <!--格式化SQL-->
+        <property name="hibernate.format_sql">true</property>
+        <!--更新数据表-->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hbm2ddl.auto">update</property> -->
+
+        <!--注册实体类和XML文件-->
+        <mapping class="cn.sc.SSHDemo.beans.DepartmentEntity"/>
+        <mapping resource="cn/sc/SSHDemo/beans/DepartmentEntity.hbm.xml"/>
+
+
+        <mapping class="cn.sc.SSHDemo.beans.EmployeeEntity"/>
+        <mapping resource="cn/sc/SSHDemo/beans/EmployeeEntity.hbm.xml"/>
+
+
+        <!-- <property name="connection.username"/> -->
+        <!-- <property name="connection.password"/> -->
+
+
+
+    </session-factory>
+</hibernate-configuration>

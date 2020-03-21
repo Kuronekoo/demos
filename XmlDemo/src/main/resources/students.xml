@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<students>
+    <student>
+        <name id = "001" b="big">Alice</name>
+        <sex>female</sex>
+    </student>
+    <student>
+        <name id = "002">Rose</name>
+        <sex>female</sex>
+    </student>
+</students>

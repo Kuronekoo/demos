@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.yunji.oa.dao.IUserDAO">
+
+    <sql id="Base_Column_List">
+      id,
+	  user_name userName,
+	  real_name realName,
+	  password password,
+	  mobile mobile,
+	  email email,
+	  dep_id depId,
+	  create_date createDate,
+	  update_date updateDate
+    </sql>
+     <sql id="Query_condition">
+      <trim prefix="WHERE" prefixOverrides="AND | OR">
+              <if test="condition.userName!=null">
+			  	AND user_name Like '%${condition.userName}%'
+			  </if>
+              <if test="condition.realName!=null">
+			  	AND real_name Like '%${condition.realName}%'
+			  </if>
+              <if test="condition.password!=null">
+			  	AND password Like '%${condition.password}%'
+			  </if>
+              <if test="condition.mobile!=null">
+			  	AND mobile Like '%${condition.mobile}%'
+			  </if>
+              <if test="condition.email!=null">
+			  	AND email Like '%${condition.email}%'
+			  </if>
+              <if test="condition.depId!=null">
+			  	AND dep_id Like '%${condition.depId}%'
+			  </if>
+              <if test="condition.createDate!=null">
+			  	AND create_date Like '%${condition.createDate}%'
+			  </if>
+              <if test="condition.updateDate!=null">
+			  	AND update_date Like '%${condition.updateDate}%'
+			  </if>
+        </trim>            
+   </sql>
+    <insert id="insert" parameterType="User">
+        INSERT INTO t_oa_user (
+	        id,
+		    user_name,
+		    real_name,
+		    password,
+		    mobile,
+		    email,
+		    dep_id,
+		    create_date,
+		    update_date
+        ) VALUES (
+         	#{id},
+       		#{userName},
+       		#{realName},
+       		#{password},
+       		#{mobile},
+       		#{email},
+       		#{depId},
+       		sysdate(),
+       		sysdate()
+        )
+    </insert>
+
+    <!-- 更新 -->
+   	<update id="update" parameterType="User">
+        UPDATE t_oa_user
+        <trim prefix="SET" suffixOverrides=",">
+          <if test="userName!=null">
+           user_name=#{userName},
+          </if>
+          <if test="realName!=null">
+           real_name=#{realName},
+          </if>
+          <if test="password!=null">
+           password=#{password},
+          </if>
+          <if test="mobile!=null">
+           mobile=#{mobile},
+          </if>
+          <if test="email!=null">
+           email=#{email},
+          </if>
+          <if test="depId!=null">
+           dep_id=#{depId},
+          </if>
+          <if test="createDate!=null">
+           create_date=#{createDate},
+          </if>
+          <if test="updateDate!=null">
+           update_date=#{updateDate},
+          </if>
+        </trim>
+        WHERE
+        id =#{id}
+    </update>
+
+   	<update id="updateMap">
+        UPDATE t_oa_user
+        <trim prefix="SET" suffixOverrides=",">
+          <if test="map.userName!=null">        
+           user_name=#{map.userName},
+          </if>
+          <if test="map.realName!=null">        
+           real_name=#{map.realName},
+          </if>
+          <if test="map.password!=null">        
+           password=#{map.password},
+          </if>
+          <if test="map.mobile!=null">        
+           mobile=#{map.mobile},
+          </if>
+          <if test="map.email!=null">        
+           email=#{map.email},
+          </if>
+          <if test="map.depId!=null">        
+           dep_id=#{map.depId},
+          </if>
+          <if test="map.createDate!=null">        
+           create_date=#{map.createDate},
+          </if>
+          <if test="map.updateDate!=null">        
+           update_date=#{map.updateDate},
+          </if>
+        </trim>
+        WHERE
+       id = #{ map.id }
+	</update>
+
+
+     <insert id="insertMap" >
+        INSERT INTO t_oa_user (
+             	id,
+			 	user_name,
+			 	real_name,
+			 	password,
+			 	mobile,
+			 	email,
+			 	dep_id,
+			 	create_date,
+			 	update_date,
+        ) VALUES (
+              	#{map.id},
+		    	#{map.userName},
+		    	#{map.realName},
+		    	#{map.password},
+		    	#{map.mobile},
+		    	#{map.email},
+		    	#{map.depId},
+		    	#{map.createDate},
+		    	#{map.updateDate},
+        )
+    </insert>
+
+
+  	<update id="updateNull" parameterType="User">
+        UPDATE t_oa_user
+        <trim prefix="SET" suffixOverrides=","> 
+			    user_name=#{userName},
+			    real_name=#{realName},
+			    password=#{password},
+			    mobile=#{mobile},
+			    email=#{email},
+			    dep_id=#{depId},
+			    create_date=#{createDate},
+			    update_date=#{updateDate},
+        </trim>
+        WHERE
+        id =#{id}
+    </update>
+
+   	<delete id="deleteById" parameterType="java.lang.Integer">
+        DELETE FROM t_oa_user
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id=#{id}
+        </trim>
+    </delete>
+
+
+ 	<delete id="deleteByCondition" parameterType="java.util.Map">
+        DELETE FROM  t_oa_user 
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+				<if test="id!=null">
+					AND id =#{id},
+				</if>        
+			    <if test="userName!=null">
+					AND user_name=#{userName},
+				</if>
+			    <if test="realName!=null">
+					AND real_name=#{realName},
+				</if>
+			    <if test="password!=null">
+					AND password=#{password},
+				</if>
+			    <if test="mobile!=null">
+					AND mobile=#{mobile},
+				</if>
+			    <if test="email!=null">
+					AND email=#{email},
+				</if>
+			    <if test="depId!=null">
+					AND dep_id=#{depId},
+				</if>
+			    <if test="createDate!=null">
+					AND create_date=#{createDate},
+				</if>
+			    <if test="updateDate!=null">
+					AND update_date=#{updateDate},
+				</if>
+        </trim>
+    </delete>
+
+    <delete id="deleteByProperty" parameterType="java.util.Map">
+        DELETE FROM t_oa_user WHERE
+        ${column}=#{value}
+    </delete>
+
+    <select id="fetch" parameterType="java.lang.Integer" resultType="User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM t_oa_user
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id =#{id}
+        </trim>
+    </select>
+
+    <select id="findOne" parameterType="java.util.Map" resultType="User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM t_oa_user WHERE
+        ${property}=#{value} 
+        LIMIT 0,1
+    </select>
+
+    <select id="findList" parameterType="java.util.Map" resultType="User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM t_oa_user WHERE
+       	${column} =#{value}
+    </select>
+
+    <select id="findAll" resultType="User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM t_oa_user
+    </select>
+
+    <select id="queryPage" resultType="User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM t_oa_user
+         <include refid="Query_condition" />       
+        <if test="condition.sort != null">
+			order by ${condition.sort}
+		</if>
+        <if test="offset != null">
+            limit ${offset}, ${rows}
+        </if>
+    </select>
+
+    <select id="like" parameterType="java.util.Map" resultType="User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM t_oa_user
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="id!=null">
+				AND id like '%#{id}%'
+			</if>
+			<if test="userName!=null">
+				AND user_name Like '%$ {condition.userName}%'
+			</if>
+			<if test="realName!=null">
+				AND real_name Like '%$ {condition.realName}%'
+			</if>
+			<if test="password!=null">
+				AND password Like '%$ {condition.password}%'
+			</if>
+			<if test="mobile!=null">
+				AND mobile Like '%$ {condition.mobile}%'
+			</if>
+			<if test="email!=null">
+				AND email Like '%$ {condition.email}%'
+			</if>
+			<if test="depId!=null">
+				AND dep_id Like '%$ {condition.depId}%'
+			</if>
+			<if test="createDate!=null">
+				AND create_date Like '%$ {condition.createDate}%'
+			</if>
+			<if test="updateDate!=null">
+				AND update_date Like '%$ {condition.updateDate}%'
+			</if>
+        </trim>
+    </select>
+
+
+ 	<select id="queryList" parameterType="java.util.Map" resultType="User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM t_oa_user
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id =#{id}
+            </if>
+			<if test="userName!=null">
+				AND user_name = #{userName}
+			</if>
+			<if test="realName!=null">
+				AND real_name = #{realName}
+			</if>
+			<if test="password!=null">
+				AND password = #{password}
+			</if>
+			<if test="mobile!=null">
+				AND mobile = #{mobile}
+			</if>
+			<if test="email!=null">
+				AND email = #{email}
+			</if>
+			<if test="depId!=null">
+				AND dep_id = #{depId}
+			</if>
+			<if test="createDate!=null">
+				AND create_date = #{createDate}
+			</if>
+			<if test="updateDate!=null">
+				AND update_date = #{updateDate}
+			</if>
+        </trim>
+        ORDER BY ${orderBy} ${sortBy}
+    </select>
+
+   	<select id="queryOne" parameterType="java.util.Map" resultType="User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM t_oa_user
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id =#{id}
+            </if>
+			<if test="userName!=null">
+				AND user_name = #{userName}
+			</if>
+			<if test="realName!=null">
+				AND real_name = #{realName}
+			</if>
+			<if test="password!=null">
+				AND password = #{password}
+			</if>
+			<if test="mobile!=null">
+				AND mobile = #{mobile}
+			</if>
+			<if test="email!=null">
+				AND email = #{email}
+			</if>
+			<if test="depId!=null">
+				AND dep_id = #{depId}
+			</if>
+			<if test="createDate!=null">
+				AND create_date = #{createDate}
+			</if>
+			<if test="updateDate!=null">
+				AND update_date = #{updateDate}
+			</if>
+        </trim>
+        limit 0,1
+    </select>
+
+  	<select id="count" resultType="java.lang.Integer">
+        SELECT count(id) FROM t_oa_user
+          <include refid="Query_condition" />
+    </select>
+
+	<select id="selectMaxId" resultType="java.lang.Integer">
+	    SELECT
+	    MAX(id)
+	    FROM t_oa_user
+	</select>
+
+</mapper>
+
