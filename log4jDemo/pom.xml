@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>cn.sc.demo</groupId>
   <artifactId>log4jDemo</artifactId>
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>log4jDemo Maven Webapp</name>
   <url>http://maven.apache.org</url>
